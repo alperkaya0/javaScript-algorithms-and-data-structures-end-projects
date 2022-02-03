@@ -1,3 +1,6 @@
+// FROM WIKIPEDIA : Subtractive notation is also used for 40 (XL), 90 (XC), 400 (CD) and 900 (CM).[7] These are the only subtractive forms in standard use.
+// After learning this, it's very easy to code, just prioritize XL over X, XC over L, CD over C, CM over D.
+// So that you won't be spamming CCCC just to write 400 (CD).
 function convertToRoman(num) {
   let res = "";
   while (num > 0) {
@@ -42,7 +45,7 @@ function convertToRoman(num) {
       num -= 1;
     }
   }
- return res;
+ return res;//return the result
 }
 
-console.log(convertToRoman(29));
+console.log(convertToRoman(29));//Example
