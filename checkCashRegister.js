@@ -2,19 +2,19 @@ function checkCashRegister(price, cash, cid) {
   //penny 1 cent, nickel 5 cent, dime 10 cent, quarter 25 cent
   let change = [];
   let sumCid = 0;
-  for (let i = 0; i < cid.length; ++i) {
+  for (let i = 0; i < cid.length; ++i) {//Calculate the sum money in the machine
     sumCid += cid[i][1];
   }
-  if (cash - price === sumCid) {
+  if (cash - price === sumCid) {//If change equals to the money in the machine return CLOSED
     return {status: "CLOSED", change: cid};
   }
-  if (price > cash || sumCid < price || sumCid < cash) {
+  if (price > cash || sumCid < price || sumCid < cash) {//If we can't give back the change or the money we recieved is not enough return INSUFFICIENT FUNDS
     return {status: "INSUFFICIENT_FUNDS", change: []};
   }
-  let numChange = cash-price+0.00000000000006;
+  let numChange = cash-price+0.00000000000006;//Just to avoid rounding errors I added really a small number , calculate the change
   let i = 0;
-  while (numChange > 0 && i < 2000) {
-    ++i;
+  while (numChange > 0 && i < 2000) {//Calculate the money in the machine in speficied format by the question
+    ++i;//Condition of i is here to avoid infinite loops
     if (numChange >= 100 && cid[8][1] > 0) {
       change.push(["ONE HUNDRED", 100]);
       numChange -= 100;
@@ -55,7 +55,8 @@ function checkCashRegister(price, cash, cid) {
   }
   let newChange = [];
   console.log(numChange);
-  for (let i = 0; i < cid.length; ++i) {
+  for (let i = 0; i < cid.length; ++i) {//For each element of cid(starting point of our machine) loop through every element of our change array, and calculate the sum amount of each element.
+    //For example for ONE HUNDRED, it will search all elements of change array and increase the amount by 100 each time it sees an ONE HUNDRED element, but while inserting to the newChange array, it will insert only once with the total amount, for example : ["ONE HUNDRED",700]
     let amount = 0;
     for (let y = 0; y < change.length; ++y) {
       if (change[y][0] === cid[i][0]) {
